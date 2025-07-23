@@ -1,0 +1,130 @@
+<div class="flex items-center justify-between mb-8">
+  <h2 class="text-3xl font-extrabold text-gray-800 tracking-tight">
+    Detalle del producto
+  </h2>
+  <button
+    [routerLink]="['/products']"
+    routerLinkActive="router-link-active"
+    class="bg-blue-500 hover:bg-blue-600 text-white px-5 py-2 rounded shadow transition-colors flex items-center gap-2"
+  >
+    <svg
+      class="w-4 h-4 mr-1"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M15 19l-7-7 7-7"
+      />
+    </svg>
+    Volver
+  </button>
+</div>
+
+<div
+  *ngIf="product() as p; else cargando"
+  class="bg-white rounded-2xl shadow-lg p-8 flex flex-col md:flex-row gap-8 border border-gray-100"
+>
+  <!-- Imágenes-->
+  <div class="md:w-1/3 flex flex-col items-center">
+    <div class="w-full flex flex-col items-center">
+      <div
+        class="w-56 h-56 bg-gray-100 rounded-lg flex items-center justify-center overflow-hidden mb-4 border border-gray-200"
+      >
+        <img
+          *ngIf="p.images && p.images.length > 0; else nohay"
+          [src]="p.images[0]"
+          alt="Imagen principal del producto"
+          class="object-cover w-full h-full"
+        />
+      </div>
+      <div
+        class="flex flex-wrap gap-2 justify-center"
+        *ngIf="p.images && p.images.length > 1"
+      >
+        <img
+          *ngFor="let img of p.images.slice(1)"
+          [src]="img"
+          alt="Imagen del producto"
+          class="w-16 h-16 object-cover rounded border border-gray-200 hover:scale-105 transition-transform"
+        />
+      </div>
+    </div>
+  </div>
+
+  <!-- Contenido -->
+  <div class="md:w-2/3 flex flex-col gap-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div>
+        <span class="block text-xs font-semibold text-gray-500 uppercase mb-1"
+          >ID</span
+        >
+        <span class="text-lg text-gray-900 font-medium">{{ p.id }}</span>
+      </div>
+      <div>
+        <span class="block text-xs font-semibold text-gray-500 uppercase mb-1"
+          >Título</span
+        >
+        <span class="text-lg text-gray-900 font-medium">{{ p.title }}</span>
+      </div>
+      <div class="sm:col-span-2">
+        <span class="block text-xs font-semibold text-gray-500 uppercase mb-1"
+          >Descripción</span
+        >
+        <span class="text-gray-700">{{ p.description }}</span>
+      </div>
+      <div>
+        <span class="block text-xs font-semibold text-gray-500 uppercase mb-1"
+          >Categoría</span
+        >
+        <span class="text-gray-900">{{ p.category }}</span>
+      </div>
+      <div>
+        <span class="block text-xs font-semibold text-gray-500 uppercase mb-1"
+          >Precio</span
+        >
+        <span class="text-green-600 font-bold text-lg">${{ p.price }}</span>
+      </div>
+      <div>
+        <span class="block text-xs font-semibold text-gray-500 uppercase mb-1"
+          >Descuento (%)</span
+        >
+        <span class="text-gray-900">{{ p.discountPercentage }}</span>
+      </div>
+      <div>
+        <span class="block text-xs font-semibold text-gray-500 uppercase mb-1"
+          >Rating</span
+        >
+        <span class="text-yellow-500 font-bold flex items-center">
+          <svg class="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 20 20">
+            <path
+              d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.967a1 1 0 00.95.69h4.175c.969 0 1.371 1.24.588 1.81l-3.38 2.455a1 1 0 00-.364 1.118l1.287 3.966c.3.922-.755 1.688-1.54 1.118l-3.38-2.455a1 1 0 00-1.175 0l-3.38 2.455c-.784.57-1.838-.196-1.54-1.118l1.287-3.966a1 1 0 00-.364-1.118L2.05 9.394c-.783-.57-.38-1.81.588-1.81h4.175a1 1 0 00.95-.69l1.286-3.967z"
+            />
+          </svg>
+          {{ p.rating }}
+        </span>
+      </div>
+      <div>
+        <span class="block text-xs font-semibold text-gray-500 uppercase mb-1"
+          >Stock</span
+        >
+        <span class="text-gray-900">{{ p.stock }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #nohay>
+  <div class="flex items-center justify-center py-10">
+    <p class="text-gray-400 text-base animate-pulse">No hay imágenes</p>
+  </div>
+</ng-template>
+
+<ng-template #cargando>
+  <div class="flex items-center justify-center py-10">
+    <p class="text-gray-500 text-lg animate-pulse">Cargando producto...</p>
+  </div>
+</ng-template>
