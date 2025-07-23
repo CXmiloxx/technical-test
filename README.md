@@ -62,6 +62,38 @@ Esta aplicación es una plataforma de gestión de productos construida con Angul
    ```
 3. Abre tu navegador en [http://localhost:4200/](http://localhost:4200/)
 
+
+## Despliegue automático con GitHub Actions
+
+Este proyecto incluye un flujo de trabajo de **GitHub Actions** para automatizar el proceso de integración continua y despliegue en un servidor remoto mediante SSH.
+
+### ¿Qué hace el workflow?
+
+- **Se ejecuta automáticamente** cada vez que hay un push a la rama `master`.
+- **Instala las dependencias** del proyecto usando `npm ci`.
+- **Compila la aplicación Angular** con `npm run build`.
+- **Configura la conexión SSH** usando las llaves y variables de entorno definidas en los secrets del repositorio.
+- **Limpia la carpeta de destino** en el servidor remoto (`/var/www/proyect/html/`).
+- **Copia los archivos generados** en la carpeta `dist/technical-test/browser/` al servidor remoto usando `scp`.
+
+### ¿Cómo funciona?
+
+1. El workflow se define en `.github/workflows/deploy.yml`.
+2. Cuando haces push a `master`, GitHub ejecuta los pasos definidos:
+   - Clona el repositorio.
+   - Usa Node.js 20 para el entorno de build.
+   - Instala dependencias y construye el proyecto.
+   - Configura la llave SSH y el host remoto.
+   - Borra el contenido anterior en el servidor de destino.
+   - Sube los archivos nuevos al servidor vía SCP.
+3. El servidor remoto queda actualizado automáticamente con la última versión de la aplicación.
+
+### Requisitos
+
+- Debes tener configurados los secrets en GitHub: `SSH_PRIVATE_KEY`, `SSH_USER`, `SSH_HOST`, `SSH_PORT`.
+- El servidor debe aceptar conexiones SSH y tener permisos de escritura en la carpeta de destino.
+
+
 ## Dependencias principales
 
 - Angular 18+
