@@ -10,28 +10,28 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-    - name: Checkout repo
-      uses: actions/checkout@v3
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
-    - name: Use Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: 20
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
 
-    - name: Install dependencies
-      run: npm ci --legacy-peer-deps
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps
 
-    - name: Build Angular project
-      run: npm run build
+      - name: Build Angular project
+        run: npm run build
 
-    - name: Set up SSH
-      run: |
-        mkdir -p ~/.ssh
-        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
-    - name: Deploy
-      run: |
-        ssh -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "rm -rf ~/angular-app && mkdir -p ~/angular-app"
-        scp -P ${{ secrets.SSH_PORT }} -r ./dist/technical-test/browser/* ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/angular-app
+      - name: Deploy
+        run: |
+          ssh -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "sudo rm -rf /var/www/html/*"
+          scp -P ${{ secrets.SSH_PORT }} -r ./dist/technical-test/browser/* ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/html/
