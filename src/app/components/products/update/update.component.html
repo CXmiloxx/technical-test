@@ -1,0 +1,42 @@
+<div class="max-w-lg mx-auto bg-white shadow-lg rounded-lg p-8 mt-8">
+  <h2 class="text-2xl font-extrabold text-gray-800 mb-6 flex items-center gap-2">
+    <svg class="w-7 h-7 text-yellow-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+    </svg>
+    Editar Producto
+  </h2>
+  <form [formGroup]="producForm" (ngSubmit)="onSubmit()" class="space-y-6">
+    <div>
+      <label class="block text-gray-700 font-semibold mb-2" for="title">Título</label>
+      <input
+        id="title"
+        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-400 transition"
+        formControlName="title"
+        placeholder="Ingrese el título del producto"
+        autocomplete="off"
+      />
+      <div
+        *ngIf="producForm.get('title')?.invalid && producForm.get('title')?.touched"
+        class="text-red-500 text-xs mt-1"
+      >
+        El título es requerido
+      </div>
+    </div>
+    <div class="flex justify-end gap-2">
+      <button
+        class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg font-semibold transition"
+        type="button"
+        routerLink="/products"
+      >
+        Cancelar
+      </button>
+      <button
+        class="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-2 rounded-lg font-semibold shadow transition disabled:opacity-50"
+        type="submit"
+        [disabled]="producForm.invalid"
+      >
+        Guardar Cambios
+      </button>
+    </div>
+  </form>
+</div>
