@@ -1,27 +1,84 @@
 # TechnicalTest
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.20.
+Esta aplicación es una plataforma de gestión de productos construida con Angular 18. Permite listar, crear, visualizar, editar y eliminar productos de manera sencilla y visual, integrando alertas y confirmaciones amigables para el usuario.
 
-## Development server
+## Características principales
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- **Listado de productos:**
 
-## Code scaffolding
+  - Visualiza todos los productos disponibles en una interfaz moderna y responsiva.
+  - Muestra detalles clave como título, descripción, categoría, precio, descuento, rating, stock e imágenes.
+  - Solo se muestran productos activos (no eliminados lógicamente).
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- **Crear producto:**
 
-## Build
+  - Formulario reactivo para agregar nuevos productos con validaciones.
+  - Campos principales: título, descripción, categoría y precio.
+  - Al crear un producto, se muestra una alerta de éxito y se redirige al listado.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- **Visualizar producto:**
 
-## Running unit tests
+  - Consulta el detalle completo de un producto seleccionado, incluyendo todas sus propiedades e imágenes.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- **Editar producto:**
 
-## Running end-to-end tests
+  - Permite modificar los datos de un producto existente mediante un formulario reactivo.
+  - Al guardar los cambios, se redirige al listado.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+- **Eliminar producto:**
 
-## Further help
+  - Elimina productos con confirmación mediante SweetAlert2.
+  - La eliminación es lógica: el producto no se borra físicamente, solo se marca como eliminado y deja de mostrarse en la lista.
+  - Al eliminar, se muestra una alerta de éxito.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- **Navegación:**
+  - Navegación fluida entre listado, creación, edición y detalle de productos usando rutas de Angular.
+
+## ¿Cómo funciona?
+
+1. **Inicio:**
+
+   - Al ingresar, se muestra la lista de productos activos.
+   - Puedes crear un nuevo producto con el botón "+".
+
+2. **Crear producto:**
+
+   - Completa el formulario y presiona "Crear Producto".
+   - Si el formulario es válido, el producto se agrega y verás una alerta de éxito.
+
+3. **Ver/Editar/Eliminar:**
+   - Desde la lista, puedes visualizar, editar o eliminar cualquier producto usando los botones correspondientes.
+   - Al eliminar, se pedirá confirmación y el producto desaparecerá de la lista tras aceptar.
+
+## Instalación y uso
+
+1. Instala las dependencias:
+   ```sh
+   npm install
+   ```
+2. Ejecuta el servidor de desarrollo:
+   ```sh
+   ng serve
+   ```
+3. Abre tu navegador en [http://localhost:4200/](http://localhost:4200/)
+
+## Dependencias principales
+
+- Angular 18+
+- SweetAlert2 (para alertas y confirmaciones)
+- TailwindCSS (para estilos)
+
+## Notas
+
+- La aplicación utiliza una API de ejemplo (DummyJSON) para simular operaciones CRUD.
+- El borrado de productos es lógico (no se elimina físicamente, solo se oculta).
+
+## Scripts útiles
+
+- `ng serve` — Inicia el servidor de desarrollo.
+- `ng build` — Compila la aplicación para producción.
+- `ng test` — Ejecuta los tests unitarios.
+
+## Ayuda adicional
+
+Para más información sobre Angular CLI, ejecuta `ng help` o visita la [documentación oficial](https://angular.dev/tools/cli).
