@@ -33,5 +33,5 @@ jobs:
 
       - name: Deploy
         run: |
-          ssh -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "rm -rf /var/www/html/*"
-          scp -P ${{ secrets.SSH_PORT }} -r ./dist/technical-test/browser/* ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/html/
+          ssh -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "rm -rf /var/www/proyect/html/*"
+          scp -P ${{ secrets.SSH_PORT }} -r ./dist/technical-test/browser/* ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/proyect/html/
