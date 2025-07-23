@@ -34,4 +34,4 @@ jobs:
     - name: Deploy
       run: |
         ssh -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "rm -rf ~/angular-app && mkdir -p ~/angular-app"
-        scp -P ${{ secrets.SSH_PORT }} -r ./dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/angular-app
+        scp -P ${{ secrets.SSH_PORT }} -r ./dist/* ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/angular-app
